@@ -18,8 +18,8 @@ export class UsersComponent implements OnInit {
   selectedUser$: Observable<User | undefined>;
 
   constructor(private store: Store<State>) {
-    this.users$ = this.store.pipe(select(usersSelector), tap(users => console.log(users)))
-    this.selectedUser$ = this.store.pipe(select(selectUserById), tap(user => console.log(user)))
+    this.users$ = this.store.pipe(select(usersSelector))
+    this.selectedUser$ = this.store.pipe(select(selectUserById))
   }
 
   selectUser(id: string) {
