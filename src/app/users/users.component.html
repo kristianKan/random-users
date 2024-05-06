@@ -1,0 +1,17 @@
+<div *ngIf="users$ | async as users; else loading">
+  <ul *ngIf="users.length; else noData">
+    <li *ngFor="let user of users">
+      {{ user.name.title }}
+      {{ user.name.first }}
+      {{ user.name.last }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
+
+<ng-template #noData>
+  <p>Users array is empty.</p>
+</ng-template>
