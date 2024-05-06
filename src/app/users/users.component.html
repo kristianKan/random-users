@@ -1,17 +1,20 @@
-<div *ngIf="users$ | async as users; else loading">
-  <ul *ngIf="users.length; else noData">
-    <li *ngFor="let user of users">
-      {{ user.name.title }}
-      {{ user.name.first }}
-      {{ user.name.last }}
-    </li>
-  </ul>
+<div style="display: flex; height: 100vh">
+  <div style="width: 25%; overflow: auto; border-right: 1px solid #ccc; padding: 1em;">
+    <div *ngFor="let user of users$ | async; trackBy: trackByFn" 
+         (click)="selectUser(user.id.value)" 
+         [class.selected]="(selectedUser$ | async)?.id?.value === user.id.value"
+         class="user-list-item">
+      <div style="margin-right: 1em;">
+        <img [src]="user.picture.thumbnail" alt="User avatar">
+      </div>
+      <div>{{ user.name.first }} {{ user.name.last }}</div>
+    </div>
+  </div>
+
+  <div style="width: 75%; padding: 1em;">
+    <div *ngIf="selectedUser$ | async as selectedUser">
+      <h2>{{ selectedUser.name.first }} {{ selectedUser.name.last }}</h2>
+      <!-- Display other user data here -->
+    </div>
+  </div>
 </div>
-
-<ng-template #loading>
-  <p>Loading...</p>
-</ng-template>
-
-<ng-template #noData>
-  <p>Users array is empty.</p>
-</ng-template>

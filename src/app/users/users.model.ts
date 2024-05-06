@@ -3,7 +3,7 @@ import { User } from '../user//user.model';
 export interface UsersState {
   users: {
     users: User[];
-    loading: boolean;
+    selectedId: string
     error: any;
   }
 }

@@ -1,0 +1,16 @@
+.user-list-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 1em;
+  padding: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.user-list-item:hover {
+  background-color: #f0f0f0;
+}
+
+.user-list-item.selected {
+  background-color: #d0d0d0;
+}

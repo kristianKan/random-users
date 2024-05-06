@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 })
 
 export class UsersService {
-  private apiUrl = 'https://randomuser.me/api/?results=50';
+  private apiUrl = 'https://randomuser.me/api/?results=10';
   private email = 'flag.user@users.io' 
 
   constructor(private http: HttpClient, private store: Store) { }

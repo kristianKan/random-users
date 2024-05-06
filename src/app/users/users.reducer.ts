@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadDataSuccess, loadDataFailure, flagUsers } from './users.actions';
+import { loadDataSuccess, loadDataFailure, flagUsers, selectUser } from './users.actions';
 import { User } from '../user/user.model';
 
 export const initialState = {
   users: [] ,
-  error: null
+  error: null,
+  selectedId: '' 
 };
 
 export const usersReducer = createReducer(
@@ -13,5 +14,6 @@ export const usersReducer = createReducer(
     const usersProcessed = payload.users.results.map((user: User) => ({ ...user, flagged: false }));
     return { ...state, users: usersProcessed };
   }),
-  on(loadDataFailure, (state, { payload }) => ({ ...state, data: [], error: payload.message })),
+  on(loadDataFailure, (state, { payload }) => ({ ...state, users: [], error: payload.message })),
+  on(selectUser, (state, { id }) => ({ ...state, selectedId: id }))
 );

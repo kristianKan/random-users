@@ -5,8 +5,8 @@ import { tap } from 'rxjs/operators';
 
 import { UsersState } from './users.model';
 import { User } from '../user/user.model';
-import { usersSelector } from './users.selectors';
-import { loadData } from './users.actions';
+import { usersSelector, selectUserById } from './users.selectors';
+import { loadData, selectUser } from './users.actions';
 
 @Component({
   selector: 'app-users',
@@ -15,11 +15,19 @@ import { loadData } from './users.actions';
 })
 export class UsersComponent implements OnInit {
   users$: Observable<User[]>;
+  selectedUser$: Observable<User | undefined>;
 
   constructor(private store: Store<UsersState>) {
-    this.users$ = this.store.pipe(
-      select(usersSelector),
-      tap(users => console.log(users)))
+    this.users$ = this.store.pipe(select(usersSelector))
+    this.selectedUser$ = this.store.pipe(select(selectUserById), tap(user => console.log(user)))
+  }
+
+  selectUser(id: string) {
+    this.store.dispatch(selectUser(id));
+  }
+
+  trackByFn(index: Number, user: User) {
+    return user.id.value;
   }
 
   ngOnInit(): void {

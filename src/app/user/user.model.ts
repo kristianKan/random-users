@@ -1,9 +1,10 @@
 export interface User {
-  id: string;
+  id: { value: string };
   name: {
     title: string;
     first: string;
     last: string;
   };
   email: string;
+  picture: { thumbnail: string }
 }
