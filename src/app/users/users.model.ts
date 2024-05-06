@@ -1,9 +1,11 @@
 import { User } from '../user//user.model';
 
+export interface State {
+  users: UsersState; 
+}
+
 export interface UsersState {
-  users: {
-    users: User[];
-    selectedId: string
-    error: any;
-  }
+  users: User[];
+  selectedId: string
+  error: any;
 }

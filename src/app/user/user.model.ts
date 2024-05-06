@@ -1,5 +1,6 @@
 export interface User {
   id: { value: string };
+  flagged: boolean;
   name: {
     title: string;
     first: string;

@@ -1,23 +1,23 @@
 import { createAction } from '@ngrx/store';
 
 export const loadDataSuccess = createAction(
-  '[ApiService] Load Data Success',
+  '[Service] Load Data Success',
   (payload: any) => ({ payload })
 );
 
 export const loadDataFailure = createAction(
-  '[ApiService] Load Data Failure',
+  '[Service] Load Data Failure',
   (payload: any) => ({ payload })
 );
 
-export const flagUsers = createAction(
-  '[Users Component] Flag User', 
-  (userIds: Array<string>) => ({ userIds })
+export const flagUser = createAction(
+  '[Component] Flag User', 
+  ({ id: string, flag: boolean }) => ({ id: string, flag: boolean })
 );
 
 export const selectUser = createAction(
-  '[Users Component] Select User',
+  '[Component] Select User',
   (id: string) => ({ id })
 )
 
-export const loadData = createAction('[Users Component] Load Data');
+export const loadData = createAction('[Effect] Load Data');

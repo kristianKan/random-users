@@ -3,10 +3,10 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { UsersState } from './users.model';
+import { State } from './users.model';
 import { User } from '../user/user.model';
 import { usersSelector, selectUserById } from './users.selectors';
-import { loadData, selectUser } from './users.actions';
+import { loadData, selectUser, flagUser } from './users.actions';
 
 @Component({
   selector: 'app-users',
@@ -17,14 +17,18 @@ export class UsersComponent implements OnInit {
   users$: Observable<User[]>;
   selectedUser$: Observable<User | undefined>;
 
-  constructor(private store: Store<UsersState>) {
-    this.users$ = this.store.pipe(select(usersSelector))
+  constructor(private store: Store<State>) {
+    this.users$ = this.store.pipe(select(usersSelector), tap(users => console.log(users)))
     this.selectedUser$ = this.store.pipe(select(selectUserById), tap(user => console.log(user)))
   }
 
   selectUser(id: string) {
     this.store.dispatch(selectUser(id));
   }
+
+  flagUser(id: string, flag: boolean) {
+    this.store.dispatch(flagUser({ id, flag }));
+  } 
 
   trackByFn(index: Number, user: User) {
     return user.id.value;

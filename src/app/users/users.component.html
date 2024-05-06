@@ -1,8 +1,9 @@
 <div style="display: flex; height: 100vh">
-  <div style="width: 25%; overflow: auto; border-right: 1px solid #ccc; padding: 1em;">
+  <div styloe="width: 25%; overflow: auto; border-right: 1px solid #ccc; padding: 1em;">
     <div *ngFor="let user of users$ | async; trackBy: trackByFn" 
          (click)="selectUser(user.id.value)" 
          [class.selected]="(selectedUser$ | async)?.id?.value === user.id.value"
+         [ngClass]="{'flagged': user.flagged}"
          class="user-list-item">
       <div style="margin-right: 1em;">
         <img [src]="user.picture.thumbnail" alt="User avatar">
@@ -11,10 +12,22 @@
     </div>
   </div>
 
-  <div style="width: 75%; padding: 1em;">
-    <div *ngIf="selectedUser$ | async as selectedUser">
-      <h2>{{ selectedUser.name.first }} {{ selectedUser.name.last }}</h2>
-      <!-- Display other user data here -->
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw">
+    <div style="width: 75%; padding: 1em;">
+      <div *ngIf="selectedUser$ | async as selectedUser">
+        <h2>{{ selectedUser.name.first }} {{ selectedUser.name.last }}</h2>
+        <div>
+          <div>title: {{ selectedUser.name.title }}</div>
+          <div>name: {{ selectedUser.name.first }}</div>
+          <div>surname: {{ selectedUser.name.last }}</div>
+          <div>email: {{ selectedUser.email }}</div>
+          <button 
+            (click)="flagUser(selectedUser.id.value, !selectedUser.flagged);">
+            {{ selectedUser.flagged ? 'Unflag' : 'Flag' }}
+          </button>
+        </div>
+        <!-- Display other user data here -->
+      </div>
     </div>
   </div>
 </div>
