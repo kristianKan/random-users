@@ -1,7 +1,6 @@
 import { createSelector, select } from '@ngrx/store';
 
-import { User } from '../user/user.model'
-import { State } from './users.model'
+import { User, State } from './users.models'
 
 export const selectUsers = (state: State) => state.users.users;
 

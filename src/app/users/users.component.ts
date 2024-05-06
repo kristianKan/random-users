@@ -3,8 +3,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { State } from './users.model';
-import { User } from '../user/user.model';
+import { State } from './users.models';
+import { User } from './users.models';
 import { usersSelector, selectUserById } from './users.selectors';
 import { loadData, selectUser, flagUser } from './users.actions';
 

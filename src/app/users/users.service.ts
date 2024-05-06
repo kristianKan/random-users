@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Store } from '@ngrx/store'; 
-import { FlagUserPayload } from './users.model';
+import { FlagUserPayload } from './users.models';
 
 @Injectable({
   providedIn: 'root'

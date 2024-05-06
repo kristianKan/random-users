@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
-import { FlagUserPayload } from './users.model';
+import { FlagUserPayload } from './users.models';
 
 export const loadDataSuccess = createAction(
   '[Service] Load Data Success',

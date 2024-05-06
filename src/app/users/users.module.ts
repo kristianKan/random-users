@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
 import { UsersService } from './users.service';
-import { usersReducer } from './users.reducer';
+import { usersReducer } from './users.reducers';
 import { UsersComponent } from './users.component';
 import { UsersEffects } from './users.effects';
 
