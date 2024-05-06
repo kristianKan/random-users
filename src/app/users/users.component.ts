@@ -27,7 +27,11 @@ export class UsersComponent implements OnInit {
   }
 
   flagUser(id: string, flag: boolean) {
-    this.store.dispatch(flagUser({ id, flag }));
+    // This is a dummy implementation. In a real application, you would
+    // most likely get the values of `to` and `from` from another store
+    const to = '';
+    const from = '';
+    this.store.dispatch(flagUser({ id, flag, to, from}));
   } 
 
   trackByFn(index: Number, user: User) {

@@ -9,3 +9,10 @@ export interface UsersState {
   selectedId: string
   error: any;
 }
+
+export interface FlagUserPayload {
+  id: string;
+  flag: boolean;
+  to: string;
+  from: string;
+}

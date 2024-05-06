@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Store } from '@ngrx/store'; 
+import { FlagUserPayload } from './users.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,6 @@ import { Store } from '@ngrx/store';
 
 export class UsersService {
   private apiUrl = 'https://randomuser.me/api/?results=10';
-  private email = 'flag.user@users.io' 
 
   constructor(private http: HttpClient, private store: Store) { }
 
@@ -17,8 +17,8 @@ export class UsersService {
     return this.http.get<any>(this.apiUrl);
   }
 
-  flagUser(id: string, flag: boolean, email: string): Observable<any> {
-    const payload = { id, flag, email };
+  flagUser({id, flag, to, from}: FlagUserPayload): Observable<any> {
+    const payload = { id, flag, from, to };
     return this.http.post<any>('https://api.example.com/send-email', payload);
   }
 }

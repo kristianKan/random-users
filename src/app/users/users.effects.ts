@@ -4,7 +4,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { UsersService } from './users.service';
-import { loadData, loadDataSuccess, loadDataFailure } from './users.actions';
+import { loadData, flagUser, loadDataSuccess, loadDataFailure, flagUserSuccess, flagUserFailure } from './users.actions';
 
 @Injectable()
 export class UsersEffects {
@@ -15,6 +15,18 @@ export class UsersEffects {
       catchError(error => of(loadDataFailure({ error })))
     ))
   ));
+
+  flagUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flagUser),
+      mergeMap(({ id, flag, to, from }) =>
+        this.usersService.flagUser({id, flag, to, from }).pipe(
+          map(user => flagUserSuccess({ user })),
+          catchError(error => of(flagUserFailure({ error })))
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,

@@ -1,4 +1,5 @@
 import { createAction } from '@ngrx/store';
+import { FlagUserPayload } from './users.model';
 
 export const loadDataSuccess = createAction(
   '[Service] Load Data Success',
@@ -10,9 +11,19 @@ export const loadDataFailure = createAction(
   (payload: any) => ({ payload })
 );
 
+export const flagUserSuccess = createAction(
+  '[Service] Flag User Success',
+  (payload: any) => ({ payload })
+);
+
+export const flagUserFailure = createAction(
+  '[Service] Flag User Failure',
+  (payload: any) => ({ payload })
+);
+
 export const flagUser = createAction(
   '[Component] Flag User', 
-  ({ id: string, flag: boolean }) => ({ id: string, flag: boolean })
+  ({id, flag, to, from}: FlagUserPayload) => ({ id, flag, to, from })
 );
 
 export const selectUser = createAction(
