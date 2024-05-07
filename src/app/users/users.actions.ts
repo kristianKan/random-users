@@ -31,4 +31,6 @@ export const selectUser = createAction(
   (id: string) => ({ id })
 )
 
+export const loadDataFromLocalStorage = createAction('[Effect] Load Data From Local Storage');
+
 export const loadData = createAction('[Effect] Load Data');

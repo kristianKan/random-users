@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
 import { UsersService } from './users.service';
-import { usersReducer } from './users.reducers';
+import { usersReducer, localStorageSyncReducer } from './users.reducers';
 import { UsersComponent } from './users.component';
 import { UsersEffects } from './users.effects';
 
@@ -15,7 +15,10 @@ import { UsersEffects } from './users.effects';
   declarations: [UsersComponent],
   imports: [
     CommonModule,
-    StoreModule.forRoot({ users: usersReducer }),
+    StoreModule.forRoot(
+      { users: usersReducer },
+      { metaReducers: [localStorageSyncReducer] }
+    ),
     EffectsModule.forRoot([UsersEffects]),
     MatSidenavModule,
     MatListModule,

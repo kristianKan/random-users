@@ -1,8 +1,8 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, ActionReducer } from '@ngrx/store';
 import { v4 as uuidv4 } from 'uuid';
 
-import { loadDataSuccess, loadDataFailure, flagUser, selectUser } from './users.actions';
-import { User, UsersState } from './users.models';
+import { loadDataSuccess, loadDataFailure, flagUser, selectUser, loadDataFromLocalStorage } from './users.actions';
+import { User, UsersState, State } from './users.models';
 
 export const initialState: UsersState = {
   users: [] ,
@@ -27,5 +27,19 @@ export const usersReducer = createReducer(
     // generally, the flag should be set on the server and the updated user should be returned
     const updatedUsers = state.users.map((user: User) => user.id === id ? { ...user, flagged: flag } : user);
     return { ...state, users: updatedUsers}
-  })
+  }),
+  on(loadDataFromLocalStorage, (state) => {
+    const localStorageState = localStorage.getItem('state');
+    return localStorageState ? JSON.parse(localStorageState).users : state;
+  }),
 );
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return function(state: State, action) {
+    const localStorageState = localStorage.getItem('state');
+    const initialState = localStorageState ? JSON.parse(localStorageState) : state;
+    const nextState = reducer(initialState, action);
+    localStorage.setItem('state', JSON.stringify(nextState));
+    return nextState;
+  };
+}

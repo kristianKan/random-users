@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { UsersService } from './users.service';
-import { loadData, flagUser, loadDataSuccess, loadDataFailure, flagUserSuccess, flagUserFailure } from './users.actions';
+import { 
+  loadData, 
+  loadDataSuccess, 
+  loadDataFailure, 
+  flagUser, 
+  flagUserSuccess, 
+  flagUserFailure,
+  loadDataFromLocalStorage
+} from './users.actions';
 
 @Injectable()
 export class UsersEffects {
@@ -25,6 +33,13 @@ export class UsersEffects {
           catchError(error => of(flagUserFailure({ error })))
         )
       )
+    )
+  );
+
+  loadDataFromLocalStorage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ROOT_EFFECTS_INIT),
+      map(() => loadDataFromLocalStorage())
     )
   );
 

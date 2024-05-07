@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 
 import { State } from './users.models';
 import { User } from './users.models';
@@ -39,6 +39,13 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadData());
+    this.store.select(usersSelector).pipe(
+      take(1),
+      tap(users => {
+        if (users.length === 0) {
+          this.store.dispatch(loadData());
+        }
+      })
+    ).subscribe();
   }
 }

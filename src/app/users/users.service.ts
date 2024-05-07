@@ -9,7 +9,7 @@ import { FlagUserPayload } from './users.models';
 })
 
 export class UsersService {
-  private apiUrl = 'https://randomuser.me/api/?results=50';
+  private apiUrl = 'https://randomuser.me/api/?results=10';
 
   constructor(private http: HttpClient, private store: Store) { }
 
