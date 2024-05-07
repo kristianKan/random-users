@@ -1,8 +1,8 @@
 <div class="container">
   <div class="sidebar">
     <div *ngFor="let user of users$ | async; trackBy: trackByFn" 
-         (click)="selectUser(user.id.value)" 
-         [class.selected]="(selectedUser$ | async)?.id?.value === user.id.value"
+         (click)="selectUser(user.id)" 
+         [class.selected]="(selectedUser$ | async)?.id === user.id"
          [ngClass]="{'flagged': user.flagged}"
          class="user-list-item">
       <div class="avatar">
@@ -17,12 +17,13 @@
       <div *ngIf="selectedUser$ | async as selectedUser">
         <h2>{{ selectedUser.name.first }} {{ selectedUser.name.last }}</h2>
         <div>
+          <div>id: {{ selectedUser.id }}</div>
           <div>title: {{ selectedUser.name.title }}</div>
           <div>name: {{ selectedUser.name.first }}</div>
           <div>surname: {{ selectedUser.name.last }}</div>
           <div>email: {{ selectedUser.email }}</div>
           <button 
-            (click)="flagUser(selectedUser.id.value, !selectedUser.flagged);">
+            (click)="flagUser(selectedUser.id, !selectedUser.flagged);">
             {{ selectedUser.flagged ? 'Unflag' : 'Flag' }}
           </button>
         </div>

@@ -9,7 +9,7 @@ export interface UsersState {
 }
 
 export interface User {
-  id: { value: string };
+  id: string;
   flagged: boolean;
   name: {
     title: string;
