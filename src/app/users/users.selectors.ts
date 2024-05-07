@@ -6,7 +6,7 @@ export const selectUsers = (state: State) => state.users.users;
 
 export const usersSelector = createSelector(
   selectUsers,
-  (users: User[]) => [...users].sort((a: User, b: User) => Number(b.flagged) - Number(a.flagged))
+  (users: User[]) => users 
 );
 
 export const selectSelectedId = (state: State) => state.users.selectedId;
